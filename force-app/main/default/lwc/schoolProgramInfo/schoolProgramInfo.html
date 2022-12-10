@@ -1,0 +1,30 @@
+<template>
+  <lightning-card title="REVA Program" icon-name="custom:custom67"></lightning-card>
+  <p class="slds-p-horizontal_small"></p>
+     <template if:true={programTypeValues.data}>
+      <div class="slds-var-m-around_medium medium">            
+          <lightning-combobox
+              name="Program Types"
+              label="Program Types"
+              value={selectedProgramType}
+              placeholder="Select Program Type"
+              options={programTypeValues.data.values}
+              onchange={handleProgramTypeChange} >
+          </lightning-combobox>
+     </div>
+</template>
+
+<template for:each={getSchoolForProgramTypes} for:item="schoolProgram">   
+   <ul key={schoolProgram.schoolInfo}>
+      <lightning-accordion allow-multiple-sections-open name="school program" label={schoolProgram.schoolInfo}> 
+         <lightning-accordion-section name="school program" label={schoolProgram.schoolInfo}>
+            <template for:each={schoolProgram.programs} for:item="program">
+               <ul key={program}>
+                  <p>{program}</p>
+               </ul>
+            </template>
+        </lightning-accordion-section> 
+      </lightning-accordion>
+    </ul>
+</template>
+</template>

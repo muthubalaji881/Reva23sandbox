@@ -1,0 +1,6 @@
+.THIS slds-tabs--default__nav li.slds-active{
+     background: black;
+}
+.THIS tab-active {
+    --sds-c-tabs-scoped-color-text-active: red;
+}

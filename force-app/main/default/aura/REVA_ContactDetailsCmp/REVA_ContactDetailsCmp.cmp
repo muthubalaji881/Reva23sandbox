@@ -1,0 +1,52 @@
+<aura:component controller="REVA_ContactDetailsCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute type="Contact" name="ContactDetails" />     
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />   
+    
+    <lightning:card title="{!v.ContactDetails.Name}" >
+        <aura:set attribute="actions">
+            <lightning:button name="{!v.ContactDetails.Id}" label="Details" variant="brand" onclick="{!c.doRedirect}"/>
+        </aura:set>
+        <div class="slds-grid slds-gutters">
+           <!-- <div class="slds-col" >
+                <div class="slds-align_absolute-center">
+                 <img src="{!v.ContactDetails.Image_Url__c}" alt="Image" width="200" height = "200"/>
+                </div>
+            </div>
+			-->
+            <div class="slds-col">  
+                <table cellpadding="3" class="slds-table">
+                    <tr>
+                        <td>SRN Number</td>
+                        <td>{!v.ContactDetails.SRN_Number__c}</td>
+                    </tr>
+                    <tr>
+                        <td>Application Number</td>
+                        <td>{!v.ContactDetails.Application_Number__c}</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td>{!v.ContactDetails.School__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td>Academic Program</td>
+                        <td>{!v.ContactDetails.Primary_Academic_Program__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td>Program Batch</td>
+                        <td>{!v.ContactDetails.Program_Batch__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Number</td>
+                        <td>{!v.ContactDetails.MobilePhone}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{!v.ContactDetails.hed__WorkEmail__c}</td>
+                    </tr>                    
+                </table>
+            </div>
+        </div>
+    </lightning:card>
+    
+</aura:component>

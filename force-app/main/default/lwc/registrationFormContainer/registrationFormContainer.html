@@ -1,0 +1,39 @@
+<template>
+  <div class="registrationFormContainer">
+        
+    <lightning-layout  multiple-rows="true">
+       <lightning-layout-item  size="12" small-device-size="12" medium-device-size="6" large-device-size="4">
+          <div class="formOne">
+            <div class="formHeader">
+              <h1><b>Admissions 2023</b></h1>
+            </div>    
+              <div class="screen">
+              <lightning-flow class="screen" flow-api-name='Registration_Home_Screen'
+              flow-input-variables={flowInputVariables}
+              onstatuschange={handleStatusChange}
+              flow-finish-behavior=NONE>
+               </lightning-flow>
+              </div>
+              <div>
+                <template if:true={loader}>
+                  <div class="spinner">
+                  <lightning-spinner alternative-text="Payment Page Loading"></lightning-spinner>
+                  </div>  
+                </template>
+               
+              </div>
+          </div>
+        </lightning-layout-item> 
+        <lightning-layout-item size="12" small-device-size="12">
+          <div class="backgroundImageMobile">
+            <img src={backgroundImageMobile}>
+          </div>   
+        </lightning-layout-item>
+          <lightning-layout-item  size="12" medium-device-size="12" large-device-size="12">
+            <div class="backgroundImagePC">
+              <img src={backgroundImagePC}>
+            </div>   
+          </lightning-layout-item>
+    </lightning-layout>
+  </div>
+</template>

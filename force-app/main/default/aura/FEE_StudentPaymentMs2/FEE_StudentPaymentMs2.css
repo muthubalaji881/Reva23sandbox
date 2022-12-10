@@ -1,0 +1,125 @@
+.THIS .banner{
+    width:100%;
+    height:100%;
+}
+
+.THIS .backgroundImagePC{
+     position: relative;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    z-index: 0;
+}
+
+.THIS .backgroundImageMobile{
+        display: none;
+}
+
+.THIS .formHeader{
+    font-family:sans-serif;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: large;
+    background: linear-gradient(0deg, rgba(255,115,0,1) 0%, rgba(253,187,45,1) 100%);
+    color: white;
+    padding: 5px;
+    
+    text-align: center;
+    /* border-bottom:4px solid rgb(255,149,0); */
+    margin-bottom: -2px;
+}
+
+.THIS .paymentTable{
+    position: absolute;
+    padding-top: 0;
+   left: 25%;
+        right: 40%;
+        width: 50%; 
+        height :10%;
+        margin-top: 1%;
+        margin-bottom: 50%;
+        margin-top: 1%;
+        margin-bottom: 30%;
+        z-index: 2;
+        /*border-bottom: 4px solid rgb(255,149,0);*/
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+}
+
+@media only screen and (min-width:501px) and (max-width: 1000px){
+    
+      .THIS  .paymentTable{
+        float: none;
+        position: absolute;
+        left :15%;
+        width: 70%;
+        overflow-x: scroll;
+        
+        height: 50%;
+        display: block;
+        margin-top: 3%;
+        z-index: 2;
+        border-bottom: 0;
+    }
+
+    .THIS .table{
+        overflow-x: scroll;
+    }
+   .THIS .table::-webkit-scrollbar {
+        width: 16px;
+      }
+
+   
+      
+      .THIS  .table::-webkit-scrollbar-thumb {
+        background-color: #FFA500;
+        border-radius: 100px;
+      }
+    
+}
+
+@media only screen and (min-width:321px) and (max-width: 500px){    
+   .THIS .backgroundImageMobile{
+        position: relative;
+        object-fit: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 5px;
+        z-index: 0;
+    }
+
+  .THIS  .backgroundImagePC{
+        display: none;
+    }
+    
+    
+    
+  .THIS  .paymentTable{
+        float: none;
+        position: absolute;
+        width: 98%;
+        overflow-x: scroll;
+        left: 1%;
+        height: 40%;
+        display: block;
+        margin-top: 15%;
+        z-index: 2;
+        border-bottom: 0;
+    }
+
+    .THIS .table{
+        overflow-x: scroll;
+    }
+   .THIS .table::-webkit-scrollbar {
+        width: 16px;
+      }
+
+   
+      
+      .THIS  .table::-webkit-scrollbar-thumb {
+        background-color: #FFA500;
+        border-radius: 100px;
+      }
+}

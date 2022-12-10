@@ -1,0 +1,112 @@
+<aura:component controller="ATT_StudentAttendance_Ctrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute type="string" name="ProgName"/>
+    <aura:attribute type="string" name="BatchRecType"/>
+    <aura:attribute type="string" name="GroupRecType"/>
+    <aura:attribute type="string" name="SemNo"/>
+    <aura:attribute type="integer" name="TCompleted"/>
+    <aura:attribute type="integer" name="TAttended"/>
+    <aura:attribute type="integer" name="TPercentage"/>
+    <aura:attribute type="string" name="SecName"/>
+    <aura:attribute type="Map" name="MapFaculty"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <div class="slds-box" style="background-color:white;" width="100%" >
+        <div style="text-align:center;font-size:large"><b>{!v.ProgName}</b></div><br/>
+        <div class="demo-only demo-only--sizing slds-grid slds-wrap" >
+            <div class="slds-size_1-of-6">
+                <aura:if isTrue="{!not(empty(v.SemNo))}">
+                    <b>Semester : {!v.SemNo}</b>
+                </aura:if>                
+            </div>
+            <div class="slds-size_1-of-6">
+                
+            </div>
+            <div class="slds-size_1-of-6">
+            </div>
+            <div class="slds-size_1-of-6">
+            </div>
+            <div class="slds-size_1-of-6">
+            </div>
+            <div class="slds-size_1-of-6" style="text-align:right;">
+                <aura:if isTrue="{!not(empty(v.SecName))}">
+                    <b>Section: {!v.SecName}</b>
+                </aura:if>
+            </div>            
+        </div>        
+        <br/>
+        <aura:if isTrue="{!v.MapFaculty.length == 0}" >
+            <center>No Data to show</center>
+        </aura:if>
+        <aura:if isTrue ="{!v.MapFaculty.length > 0}" >
+            <table class="slds-table slds-table--bordered slds-table_col-bordered slds-max-medium-table--stacked slds-border_right slds-border_left" style="overflow: visible;" width="100%" >
+                <thead>
+                    <tr>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Course Code</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Category</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Subject</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Batch/Group</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Professor</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Total Classes Completed</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Total Classes Attended</th>
+                        <th scope="col" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">Attendance Percentage</th>
+                    </tr>
+                </thead>                
+                <tbody> 
+                    <aura:iteration items="{!v.MapFaculty}" var="Cour" indexVar="key">
+                        <tr>
+                            <td data-label="Course Code" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">
+                                {!Cour.value.courseCode}
+                            </td>
+                            <td data-label="Category" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">
+                                {!Cour.value.Category}
+                            </td>
+                            <td data-label="Subject" style="word-wrap:break-word;white-space: pre-wrap;">
+                               {!Cour.value.CourseOfferingName}
+                            </td>
+                            <td data-label="Batch/Group" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">
+                                <aura:if isTrue="{!Cour.value.RecType == v.BatchRecType}">
+                                    Batch {!Cour.value.BatchNumber}
+                                </aura:if>
+                                <aura:if isTrue="{!Cour.value.RecType == v.GroupRecType}">
+                                    Group {!Cour.value.GroupNume}
+                                </aura:if>
+                            </td>
+                            <td data-label="Professor" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;">{!Cour.value.facultyName}</td>
+                            <td data-label="Total Classes Completed" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;text-align:right;">{!Cour.value.TotalClassCom}</td>
+                            <td data-label="Total Classes Attended" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;text-align:right;">{!Cour.value.TotalClassAtt}</td>
+                            <td data-label="Attendance Percentage" style="overflow-x: visible;overflow-wrap: normal;overflow-y: visible;text-align:right;">
+                                <aura:if isTrue="{!not(empty(Cour.value.TotalPercentage))}">
+                                    {!Cour.value.TotalPercentage}%
+                                </aura:if>
+                            </td>
+                        </tr>                        
+                    </aura:iteration>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td style="text-align:right;">{!v.TCompleted}</td>
+                        <td style="text-align:right;">{!v.TAttended}</td>
+                        <td style="text-align:right;">
+                            <aura:if isTrue="{!not(empty(v.TPercentage))}">
+                            <lightning:formattedNumber value="{!v.TPercentage}" maximumFractionDigits="2"/>% 
+                            </aura:if>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </aura:if>
+    </div>
+</aura:component>

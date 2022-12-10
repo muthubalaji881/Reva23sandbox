@@ -1,0 +1,30 @@
+<template>
+    <!-- Combox box with Type(Picklist) Field values -->
+ <lightning-card title="REVA Program" icon-name="custom:custom67">
+    <p class="slds-p-horizontal_small"></p>
+    <template if:true={programTypeValues.data}>
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+            name="Program Types"
+            label="Program Types"
+            value={selectedProgramType}
+            placeholder="Select Program Types"
+            options={programTypeValues.data.values}
+            onchange={handleProgramTypesChange} ></lightning-combobox>    
+            <p>Selected Program Type is:<b>{selectedProgramType}</b></p>
+        </div>
+    </template>    
+       <lightning-accordion  allow-multiple-sections-open>       
+        <lightning-accordion-section name="Schools" label="Schools"> 
+            <template for:each={relatedSchools} for:item="schoolProgram"> 
+           <!---     <p key={schoolProgram.Id}>{schoolProgram.Program_Type__c}</p> -->
+                <p key={schoolProgram.Id}>{schoolProgram.School_Name__c}</p>
+            </template>
+        </lightning-accordion-section>  
+       </lightning-accordion>
+    
+</lightning-card> <br/>
+    
+    
+
+</template>
